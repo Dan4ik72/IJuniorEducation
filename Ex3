@@ -1,0 +1,25 @@
+using System;
+
+namespace MyFirstApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string username;
+            int age;
+            int money;
+
+            Console.Write("Как вас зовут? Введите имя: ");
+            username = Console.ReadLine();
+
+            Console.Write("Сколько вам лет? Введите возраст: ");
+            age = int.Parse(Console.ReadLine());
+
+            Console.Write("Сколько денег на вашем счету? Введите количтество $ :");
+            money = int.Parse(Console.ReadLine()); 
+
+            Console.WriteLine($"Вас зовут {username}. Ваш возраст {age}. У вас {money}$ на счету.");
+        }
+    }
+}
