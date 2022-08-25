@@ -1,0 +1,21 @@
+using System;
+
+namespace MyFirstApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int damage = 20;
+            uint weight = 67;
+            string userName = "Ivan";
+            bool isWalking = true;
+            float distance = 24.5f;           
+            long duration = 2;
+            ulong livesCounter = 8;
+            double height = 189.3;
+            short money = 7893;
+            byte deaths = 3;
+        }
+    }
+}
