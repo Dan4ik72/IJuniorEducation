@@ -6,23 +6,18 @@ namespace MyFirstApp
     {     
         static void Main(string[] args)
         {
-            int gems = 0;
+            int gems;
             int gemPriсe = 3;
-            int gold = int.Parse(Console.ReadLine());            
 
-            int availableGemsToBuy = gold / gemPriсe;
+            int gold = int.Parse(Console.ReadLine());
 
             Console.WriteLine($".....Магазин......\nЦена кристаллов - {gemPriсe} золота\n");
-            Console.WriteLine($"Хотите купить {availableGemsToBuy} кристалла(ов)?");
-            Console.WriteLine("Чтобы купить нажминте на любую кнопку...");
-            Console.ReadKey();
-            Console.Clear();
 
-            while(gold >= gemPriсe)
-            {
-                gems++;
-                gold -= gemPriсe;
-            }
+            Console.WriteLine("Сколько кристаллов вы хотите купить?");
+            gems = int.Parse(Console.ReadLine());
+            Console.Clear();            
+
+            gold -= gems * gemPriсe;
 
             Console.WriteLine($".....Кошелек.....\nЗолото - {gold} \nКристаллы - {gems}");            
         }
