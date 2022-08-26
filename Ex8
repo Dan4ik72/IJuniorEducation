@@ -8,6 +8,7 @@ namespace MyFirstApp
         {
             int lineLenght;
             int timePerPerson = 10;
+            int minutesInHour = 60;
             
             double timeInLine;
             double hoursInLine;
@@ -18,8 +19,8 @@ namespace MyFirstApp
 
             timeInLine = lineLenght * timePerPerson;
 
-            hoursInLine = Math.Round(timeInLine / 60, 0);           
-            minutesInLine = Math.Round(timeInLine % 60, 2);
+            hoursInLine = Math.Round(timeInLine / minutesInHour, 0);           
+            minutesInLine = Math.Round(timeInLine % minutesInHour, 2);
 
             Console.WriteLine($"Вам осталось стоять в очереди {hoursInLine} часа и {minutesInLine} минут");            
         }
