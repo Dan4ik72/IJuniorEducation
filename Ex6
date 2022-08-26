@@ -9,10 +9,10 @@ namespace MyFirstApp
             int picturesInLine = 3;
             int totalPictures = 52;
 
-            int FilledLines = totalPictures / picturesInLine;
+            int filledLines = totalPictures / picturesInLine;
             int leftPictures = totalPictures % picturesInLine;
 
-            Console.WriteLine("Рядов заполено : " + FilledLines);
+            Console.WriteLine("Рядов заполено : " + filledLines);
             Console.WriteLine("Картинок не использовано: " + leftPictures);
         }
     }    
