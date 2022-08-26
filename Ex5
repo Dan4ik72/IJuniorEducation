@@ -1,0 +1,31 @@
+using System;
+
+namespace MyFirstApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string firstName;
+            string secondName;
+
+            string temp;
+
+            Console.Write("Введите имя: ");
+            firstName = Console.ReadLine();
+
+            Console.Write("Введите фамилию: ");
+            secondName = Console.ReadLine();
+
+            Console.WriteLine($"Вы ввели {firstName} {secondName}");
+
+            temp = secondName;
+            secondName = firstName;
+            firstName = temp;
+
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.WriteLine($"Вас зовут {firstName} {secondName}");
+            Console.BackgroundColor = ConsoleColor.Black;
+        }
+    }
+}
