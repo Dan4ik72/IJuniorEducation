@@ -1,0 +1,19 @@
+using System;
+
+namespace MyFirstApp
+{
+    class Program
+    {     
+        static void Main(string[] args)
+        {
+            int picturesInLine = 3;
+            int totalPictures = 52;
+
+            int FilledLines = totalPictures / picturesInLine;
+            int leftPictures = totalPictures % picturesInLine;
+
+            Console.WriteLine("Рядов заполено : " + FilledLines);
+            Console.WriteLine("Картинок не использовано: " + leftPictures);
+        }
+    }    
+}
