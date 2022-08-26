@@ -1,0 +1,27 @@
+using System;
+
+namespace MyFirstApp
+{
+    class Program
+    {     
+        static void Main(string[] args)
+        {
+            int lineLenght;
+            int timePerPerson = 10;
+            
+            double timeInLine;
+            double hoursInLine;
+            double minutesInLine;
+
+            Console.WriteLine("Сколько человек в очереди?");
+            lineLenght = int.Parse(Console.ReadLine());
+
+            timeInLine = lineLenght * timePerPerson;
+
+            hoursInLine = Math.Round(timeInLine / 60, 0);           
+            minutesInLine = Math.Round(timeInLine % 60, 2);
+
+            Console.WriteLine($"Вам осталось стоять в очереди {hoursInLine} часа и {minutesInLine} минут");            
+        }
+    }    
+}
