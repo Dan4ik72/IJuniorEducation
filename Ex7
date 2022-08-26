@@ -1,0 +1,30 @@
+using System;
+
+namespace MyFirstApp
+{
+    class Program
+    {     
+        static void Main(string[] args)
+        {
+            int gems = 0;
+            int gemPriсe = 3;
+            int gold = int.Parse(Console.ReadLine());            
+
+            int availableGemsToBuy = gold / gemPriсe;
+
+            Console.WriteLine($".....Магазин......\nЦена кристаллов - {gemPriсe} золота\n");
+            Console.WriteLine($"Хотите купить {availableGemsToBuy} кристалла(ов)?");
+            Console.WriteLine("Чтобы купить нажминте на любую кнопку...");
+            Console.ReadKey();
+            Console.Clear();
+
+            while(gold >= gemPriсe)
+            {
+                gems++;
+                gold -= gemPriсe;
+            }
+
+            Console.WriteLine($".....Кошелек.....\nЗолото - {gold} \nКристаллы - {gems}");            
+        }
+    }    
+}
