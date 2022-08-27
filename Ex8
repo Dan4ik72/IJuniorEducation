@@ -3,26 +3,25 @@ using System;
 namespace MyFirstApp
 {
     class Program
-    {     
+    {
         static void Main(string[] args)
         {
             int lineLenght;
             int timePerPerson = 10;
             int minutesInHour = 60;
-            
-            double timeInLine;
-            double hoursInLine;
-            double minutesInLine;
+            int timeInLine;
+            int hoursInLine;
+            int minutesInLine;
 
             Console.WriteLine("Сколько человек в очереди?");
             lineLenght = int.Parse(Console.ReadLine());
 
             timeInLine = lineLenght * timePerPerson;
 
-            hoursInLine = Math.Round(timeInLine / minutesInHour, 0);           
-            minutesInLine = Math.Round(timeInLine % minutesInHour, 2);
+            hoursInLine = timeInLine / minutesInHour;
+            minutesInLine = timeInLine % minutesInHour;
 
-            Console.WriteLine($"Вам осталось стоять в очереди {hoursInLine} часа и {minutesInLine} минут");            
+            Console.WriteLine($"Вам осталось стоять в очереди {hoursInLine} часа и {minutesInLine} минут");
         }
-    }    
+    }
 }
