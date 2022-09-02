@@ -1,0 +1,44 @@
+using System;
+
+namespace MyFirstApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            while (true)
+            {
+                Console.Clear();
+
+                Random random = new Random();
+                int randomNum = random.Next(0, 100);
+                int inputNum;
+
+                Console.WriteLine("Угадайте загаданное число: ");                
+
+                while (true)
+                {
+                    inputNum = int.Parse(Console.ReadLine());
+                    Console.Clear();
+
+                    if (inputNum == randomNum)
+                    {
+                        Console.WriteLine("Вы угадали число!...");
+                        Console.ReadLine();
+                        break;
+                    }
+
+                    if (inputNum > randomNum)
+                    {
+                        Console.WriteLine("Попробуйте число поменьше");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Попробуйте число побольше");
+                    }
+                }
+            }
+                   
+        }
+    }
+}
