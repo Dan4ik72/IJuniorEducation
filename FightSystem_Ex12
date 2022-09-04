@@ -1,0 +1,291 @@
+using System;
+using System.Threading.Tasks;
+
+namespace MyFirstApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            const string FireballAttackName = "Огненный шар";
+            const string MusicAttackName = "Атака музыкой";
+            const string DyingBreathName = "Предсмертное дыхание";
+            const string WaterballAttackName = "Водяной шар";
+            const string Waterball = "4";
+            const string Fireball = "1";
+            const string MusicAttack = "2";
+            const string DyingBreath = "3";
+
+            float playerHealth = 100;
+            float playerDamage = 0;
+
+            int playerMinDamage = 35;
+            int fireballMaxDamage = 50;
+            int musicAttackMaxDamage = 60;
+            int dyingBreathMaxDamage = 80;
+            int waterballMaxDamage = 45;
+
+            int minEnemyDamage = 30;
+            int maxEnemyDamage = 50;
+
+            float enemyHealth = 100;
+            float enemyDamage;
+
+            string playerInputToChooseSpell;
+            string enemyIcon = "*enemy*";
+            string playerIcon = "*player*";
+            string playerSpellIcon = "";
+            string enemySpellIcon = "*";
+            string fireballSpellIcon = "☼";
+            string musicAttackSpellIcon = "♫";
+            string dyingBreathAttackSpellIcon = "☻";
+            string waterballSpellIcon = "♥";
+
+            Random random = new Random();
+
+            int playerXPozition;
+            int playerYPozition;
+            int enemyXPozition;
+            int enemyYPozition;
+            int spellXPozition;
+            int spellYPozition;
+            int spellStartYPozitionOffset = 2;
+            int enemyIconLenght = enemyIcon.Length;
+            int playerIconLenght = playerIcon.Length;
+
+            bool isPlayerMove = false;
+            bool isEnemyMove = false;
+
+            ConsoleKeyInfo currentKey = new ConsoleKeyInfo();
+            Console.CursorVisible = false;
+
+            Console.WriteLine("И вот, вы наконец-то на вершине горы, готовые сразиться со своим злейшим врагом...");
+            Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("Вы потратили на подготовку к этому бою последние годы своей жизни!");
+            Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("За это время вы успели овладеть заклинаниями некоторых стихий и даже припрятали козырь в своем рукаве");
+            Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("Пора начинать!....");
+            Console.ReadLine();
+            
+
+            while (playerHealth > 0 && enemyHealth > 0)
+            {
+                playerXPozition = random.Next(20, 45);
+                playerYPozition = random.Next(0, 5);
+                enemyXPozition = random.Next(20, 45);
+                enemyYPozition = random.Next(20, 25);
+
+                Console.Clear();
+                Console.WriteLine($"Ваше здоровье - {playerHealth}\nЗдоровье врага - {enemyHealth}");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"\nДоступные заклинания:\n{FireballAttackName} - {Fireball}\n{MusicAttackName} - {MusicAttack}\n{DyingBreathName} - {DyingBreath}\n{WaterballAttackName} - {Waterball}");
+                playerInputToChooseSpell = Console.ReadLine();
+                Console.Clear();
+
+                switch (playerInputToChooseSpell)
+                {
+                    case Fireball:
+                        playerDamage = random.Next(playerMinDamage, fireballMaxDamage);
+                        playerSpellIcon = fireballSpellIcon;
+                        Console.WriteLine("Хотите начать?.... Нажмите Enter");
+                        Console.ReadLine();
+                        isPlayerMove = true;
+                        break;
+
+                    case MusicAttack:
+
+                        if (playerHealth > 60)
+                        {
+                            playerDamage = random.Next(playerMinDamage, musicAttackMaxDamage);
+                            playerSpellIcon = musicAttackSpellIcon;
+                            Console.WriteLine("Хотите начать?.... Нажмите Enter");
+                            Console.ReadLine();
+                            isPlayerMove = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Вам сломали вашу волшебную гитару.... Попробуйте использовать другое заклинание");
+                            Console.ReadLine();
+                        }
+
+                        break;
+
+                    case DyingBreath:
+
+                        if (playerHealth < 30)
+                        {
+                            playerDamage = random.Next(playerMinDamage, dyingBreathMaxDamage);
+                            playerSpellIcon = dyingBreathAttackSpellIcon;
+                            Console.WriteLine("Хотите начать?.... Нажмите Enter");
+                            Console.ReadLine();
+                            isPlayerMove = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Вы слишком хорошо себя чувствуете для смертельного издыхания.... Попоробуйте использовать другое заклинание");
+                            Console.ReadLine();
+                        }
+
+                        break;
+
+                    case Waterball:
+                        playerDamage = random.Next(playerMinDamage, waterballMaxDamage);
+                        playerSpellIcon = waterballSpellIcon;
+                        Console.WriteLine("Хотите начать?.... Нажмите Enter");
+                        Console.ReadLine();
+                        isPlayerMove = true;
+                        break;
+
+                    default:
+                        Console.WriteLine("Выберите корректное заклинание....");
+                        Console.ReadLine();
+                        break;
+                }
+
+                if (isPlayerMove == true & playerHealth > 0)
+                {
+                    Console.Clear();
+
+                    spellXPozition = playerXPozition;
+                    spellYPozition = playerYPozition + spellStartYPozitionOffset;
+
+                    Task.Factory.StartNew(() =>
+                    {
+                        while (isPlayerMove)
+                            currentKey = Console.ReadKey(true);
+                    });
+
+                    while (isPlayerMove)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.SetCursorPosition(playerXPozition, playerYPozition);
+                        Console.WriteLine(playerIcon);
+
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.SetCursorPosition(enemyXPozition, enemyYPozition);
+                        Console.WriteLine(enemyIcon);
+
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.SetCursorPosition(spellXPozition, spellYPozition);
+                        Console.Write(playerSpellIcon);
+
+                        if (currentKey.Key == ConsoleKey.D)
+                        {
+                            spellXPozition++;
+                        }
+                        else if (currentKey.Key == ConsoleKey.A)
+                        {
+                            spellXPozition--;
+                        }
+
+                        spellYPozition++;
+
+                        if (spellYPozition == enemyYPozition)
+                        {
+                            if (spellXPozition >= enemyXPozition && spellXPozition <= enemyXPozition + enemyIconLenght)
+                            {                                
+                                enemyHealth -= playerDamage;
+
+                                Console.Clear();
+                                Console.SetCursorPosition(0, 0);
+                                Console.WriteLine($"Вы нанесли врагу {playerDamage} урона");
+                                Console.WriteLine("Нажмите Enter....");
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                Console.SetCursorPosition(0, 0);
+                                Console.WriteLine("Промах....\nНажмите Enter");
+                            }
+
+                            isPlayerMove = false;
+                            isEnemyMove = true;
+                            Console.ReadLine();
+                        }
+
+                        System.Threading.Thread.Sleep(200);
+                        Console.Clear();
+                    }
+                }
+
+                if (isEnemyMove == true & enemyHealth > 0)
+                {
+                    enemyDamage = random.Next(minEnemyDamage, maxEnemyDamage);
+
+                    Console.WriteLine("Ход врага\nНажмите Enter....");
+                    Console.ReadLine();
+                    Console.Clear();
+
+                    spellXPozition = enemyXPozition;
+                    spellYPozition = enemyYPozition - spellStartYPozitionOffset;
+
+                    while (isEnemyMove)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.SetCursorPosition(playerXPozition, playerYPozition);
+                        Console.WriteLine(playerIcon);
+
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.SetCursorPosition(enemyXPozition, enemyYPozition);
+                        Console.WriteLine(enemyIcon);
+
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.SetCursorPosition(spellXPozition, spellYPozition);
+                        Console.Write(enemySpellIcon);
+
+                        if (spellXPozition < playerXPozition)
+                        {
+                            spellXPozition++;
+                        }
+                        else if (spellXPozition > playerXPozition)
+                        {
+                            spellXPozition--;
+
+                        }
+
+                        spellYPozition--;
+
+                        if (spellYPozition == playerYPozition)
+                        {
+                            if (spellXPozition >= playerXPozition && spellXPozition <= playerXPozition + playerIconLenght)
+                            {
+                                Console.Clear();
+                                Console.SetCursorPosition(0, 0);
+
+                                playerHealth -= enemyDamage;
+                                Console.WriteLine($"Враг нанес вам {enemyDamage} урона");
+                                Console.WriteLine("Нажмите Enter....");
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                Console.SetCursorPosition(0, 0);
+                                Console.WriteLine("Промах....\nНажмите Enter");
+                            }
+
+                            isEnemyMove = false;
+                            Console.ReadLine();
+                        }
+
+                        System.Threading.Thread.Sleep(200);
+                        Console.Clear();
+                    }
+                }
+            }
+
+            Console.WriteLine("Битва окончена");
+            if (playerHealth > 0)
+            {
+                Console.WriteLine("Вы победили!");
+            }
+            else
+            {
+                Console.WriteLine("Враг победил!");
+            }
+        }
+    }
+}
