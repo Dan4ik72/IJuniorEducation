@@ -27,6 +27,16 @@ namespace MyFirstApp
 
             int minEnemyDamage = 30;
             int maxEnemyDamage = 50;
+            int MinHealthBorderToMusicAttack = 60;
+            int MaxHealthBorderToDyingBreath = 30;
+
+            int rightBorderXPozition = 45;
+            int leftBorderXPozition = 20;
+            int upperBorderPlayerYPozition = 5;
+            int lowerBorderPlayerYPozition = 0;
+            int lowerBorderEnemyYPozition = 20;
+            int upperBorderEnemyYPozition = 25;
+            
 
             float enemyHealth = 100;
             float enemyDamage;
@@ -70,14 +80,14 @@ namespace MyFirstApp
             Console.Clear();
             Console.WriteLine("Пора начинать!....");
             Console.ReadLine();
-            
+
 
             while (playerHealth > 0 && enemyHealth > 0)
             {
-                playerXPozition = random.Next(20, 45);
-                playerYPozition = random.Next(0, 5);
-                enemyXPozition = random.Next(20, 45);
-                enemyYPozition = random.Next(20, 25);
+                playerXPozition = random.Next(leftBorderXPozition,rightBorderXPozition );
+                playerYPozition = random.Next(lowerBorderPlayerYPozition, upperBorderPlayerYPozition) ;
+                enemyXPozition = random.Next(leftBorderXPozition, rightBorderXPozition);
+                enemyYPozition = random.Next(lowerBorderEnemyYPozition, upperBorderEnemyYPozition);
 
                 Console.Clear();
                 Console.WriteLine($"Ваше здоровье - {playerHealth}\nЗдоровье врага - {enemyHealth}");
@@ -98,7 +108,7 @@ namespace MyFirstApp
 
                     case MusicAttack:
 
-                        if (playerHealth > 60)
+                        if (playerHealth > MinHealthBorderToMusicAttack)
                         {
                             playerDamage = random.Next(playerMinDamage, musicAttackMaxDamage);
                             playerSpellIcon = musicAttackSpellIcon;
@@ -116,7 +126,7 @@ namespace MyFirstApp
 
                     case DyingBreath:
 
-                        if (playerHealth < 30)
+                        if (playerHealth < MaxHealthBorderToDyingBreath)
                         {
                             playerDamage = random.Next(playerMinDamage, dyingBreathMaxDamage);
                             playerSpellIcon = dyingBreathAttackSpellIcon;
@@ -187,7 +197,7 @@ namespace MyFirstApp
                         if (spellYPozition == enemyYPozition)
                         {
                             if (spellXPozition >= enemyXPozition && spellXPozition <= enemyXPozition + enemyIconLenght)
-                            {                                
+                            {
                                 enemyHealth -= playerDamage;
 
                                 Console.Clear();
